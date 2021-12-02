@@ -14,4 +14,6 @@ services:
   clickhouse:
     container_name: clickhouse
     image: yandex/clickhouse-server
+    ports:
+      - "8123:8123"
     mem_limit: 512m

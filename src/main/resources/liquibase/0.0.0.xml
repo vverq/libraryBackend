@@ -4,25 +4,25 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet id="0.0.0-1" author="scope">
         <createTable tableName="users">
-            <column name="nickname" type="varchar(20)">
+            <column name="username" type="varchar">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
 
         <createTable tableName="books">
-            <column name="ISBN" type="varchar">
+            <column name="isbn" type="varchar">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="Title" type="varchar">
+            <column name="title" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="Authors" type="jsonb">
+            <column name="authors" type="jsonb">
                 <constraints nullable="false"/>
             </column>
-            <column name="Description" type="text">
+            <column name="description" type="text">
                 <constraints nullable="true"/>
             </column>
-            <column name="Year" type="int">
+            <column name="year" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -31,8 +31,8 @@
             <column name="username" type="varchar">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="ISBN" type="varchar">
-                <constraints nullable="false"/>
+            <column name="isbn" type="varchar">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="rate" type="int">
                 <constraints nullable="false"/>
@@ -42,8 +42,8 @@
         <addForeignKeyConstraint baseTableName="user_rates" baseColumnNames="username" constraintName="user_rates_username_fk"
                                  referencedTableName="users"
                                  referencedColumnNames="username"/>
-        <addForeignKeyConstraint baseTableName="user_rates" baseColumnNames="ISBN" constraintName="user_rates_ISBN_fk"
+        <addForeignKeyConstraint baseTableName="user_rates" baseColumnNames="isbn" constraintName="user_rates_isbn_fk"
                                  referencedTableName="books"
-                                 referencedColumnNames="ISBN"/>
+                                 referencedColumnNames="isbn"/>
     </changeSet>
 </databaseChangeLog>
