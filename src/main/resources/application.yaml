@@ -9,3 +9,5 @@ spring:
     change-log: classpath:/liquibase/master.yml
     database-change-log-table: _databasechangelog
     database-change-log-lock-table: _databasechangeloglock
+external:
+  externalBaseUrl: https://openlibrary.org
