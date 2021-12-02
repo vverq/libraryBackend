@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-passw0rd}
+    mem_limit: 512m
+
+  clickhouse:
+    container_name: clickhouse
+    image: yandex/clickhouse-server
+    mem_limit: 512m
