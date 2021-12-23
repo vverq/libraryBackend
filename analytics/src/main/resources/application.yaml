@@ -1,0 +1,11 @@
+clickhouse:
+  servers: ${CLICKHOUSE_JDBC_URL:}
+  user: ${CLICKHOUSE_USER:}
+  password: ${CLICKHOUSE_PASSWORD:}
+  dbname: ${CLICKHOUSE_DB_NAME:}
+mybatis:
+  configuration:
+    variables:
+      dbname: ${clickhouse.dbname}
+library:
+  base-path: http://localhost:8080

@@ -13,7 +13,8 @@ services:
 
   clickhouse:
     container_name: clickhouse
-    image: yandex/clickhouse-server
+#    image: yandex/clickhouse-server
+    image: altinity/clickhouse-server:21.8.12.29.altinitydev.arm
     ports:
       - "8123:8123"
     mem_limit: 512m

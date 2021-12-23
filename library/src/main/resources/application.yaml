@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: ${POSTGRES_JDBC_URL:}
+    username: ${POSTGRES_JDBC_USERNAME:}
+    password: ${POSTGRES_JDBC_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    default-schema: ${POSTGRES_SCHEMA:library}
+    change-log: classpath:/liquibase/master.yml
+    database-change-log-table: _databasechangelog
+    database-change-log-lock-table: _databasechangeloglock
+external:
+  externalBaseUrl: https://openlibrary.org
+
