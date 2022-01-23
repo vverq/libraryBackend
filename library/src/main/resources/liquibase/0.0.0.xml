@@ -46,4 +46,11 @@
                                  referencedTableName="books"
                                  referencedColumnNames="isbn"/>
     </changeSet>
+    <changeSet id="0.0.2" author="scope">
+        <modifyDataType tableName="books" columnName="authors" newDataType="varchar"/>
+    </changeSet>
+    <changeSet id="0.0.3" author="scope">
+        <dropNotNullConstraint tableName="books" columnName="authors"/>
+        <dropNotNullConstraint tableName="books" columnName="title"/>
+    </changeSet>
 </databaseChangeLog>

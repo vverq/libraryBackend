@@ -11,8 +11,8 @@ interface RateRepository {
     @Select(
         """
             select 
+                isbn,
                 title, 
-                authors,
                 round(avg(rate), 2)
             from 
                 ${"$"}{dbname}.books b
@@ -21,13 +21,15 @@ interface RateRepository {
                     on b.isbn = br.isbn
             group by
                 title,
-                authors
+                isbn
         """
     )
     fun getAllBooksWithAvg(): List<ShortBookPojo>
 
-    @Insert("""
+    @Insert(
+        """
         insert into ${"$"}{dbname}.book_rate values (now(), #{username}, #{isbn}, #{rate})
-    """)
+    """
+    )
     fun rateBook(username: String, isbn: String, rate: Int)
 }

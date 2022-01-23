@@ -8,6 +8,7 @@ import ru.pinguin.librarybackend.data.rate.RateId
 import ru.pinguin.librarybackend.data.rate.RateRepository
 import ru.pinguin.librarybackend.dto.BookInfo
 import ru.pinguin.librarybackend.dto.CreateBookRequest
+import ru.pinguin.librarybackend.dto.RateInfo
 import ru.pinguin.librarybackend.dto.UpdateBookRequest
 import ru.pinguin.librarybackend.exception.AlreadyExistsException
 import ru.pinguin.librarybackend.exception.NotFoundException
@@ -54,4 +55,6 @@ class BooksService(
         }
         rateRepository.persist(BookRate(RateId(username, isbn), rate))
     }
+
+    fun isRated(username: String, isbn: String): RateInfo = rateRepository.getRate(username, isbn)
 }

@@ -16,9 +16,9 @@ import javax.persistence.Table
 data class Book(
     @Id @Column(name = "isbn") var isbn: String,
     @Column(name = "title") var title: String,
-    @Column(name = "authors") @Type(type = "jsonb") var authors: List<String>?,
+    @Column(name = "authors") var authors: String?,
     @Column(name = "description") var description: String?,
-    @Column(name = "year") var year: Int = 1970
+    @Column(name = "year") var year: Int? = 1970
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

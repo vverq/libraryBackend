@@ -15,15 +15,15 @@ import ru.pinguin.librarybackend.exception.AlreadyExistsException
 class BooksService(
     private val repository: RateRepository,
     private val objectMapper: ObjectMapper,
-    @Value("${"$"}{library.base-path}") private val libraryBasePath: String
+    @Value("\${library.base-path}") private val libraryBasePath: String
 ) {
 
     fun getAllBooks(): List<BookShortInfo> = repository
         .getAllBooksWithAvg()
         .map {
             BookShortInfo(
+                it.isbn,
                 it.title,
-                parseArray(it.authors),
                 it.rate
             )
         }
@@ -37,6 +37,7 @@ class BooksService(
         val httpClient = OkHttpClient()
         val request = Request.Builder().post(RequestBody.create(MediaType.get("application/json"), ByteArray(0))).url("${libraryBasePath}/api/v1/library/book/${isbn}/rate?username=${username}&rate=${rate}").build()
         val execute = httpClient.newCall(request).execute()
+        execute.body()?.close()
         if (execute.code() == 409)
             throw AlreadyExistsException("Вы уже оценили эту книгу")
         if (execute.code() != 200)

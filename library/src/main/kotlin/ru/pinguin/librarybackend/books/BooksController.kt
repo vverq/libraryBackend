@@ -3,6 +3,7 @@ package ru.pinguin.librarybackend.books
 import org.springframework.web.bind.annotation.RestController
 import ru.pinguin.librarybackend.dto.BookInfo
 import ru.pinguin.librarybackend.dto.CreateBookRequest
+import ru.pinguin.librarybackend.dto.RateInfo
 import ru.pinguin.librarybackend.dto.UpdateBookRequest
 
 @RestController
@@ -17,4 +18,6 @@ class BooksController(private val booksService: BooksService) : BooksApi {
     override fun createBookFromIsbn(isbn: String): BookInfo = booksService.createBookFromIsbn(isbn)
 
     override fun rateBook(username: String, isbn: String, rate: Int) = booksService.rateBook(username, isbn, rate)
+
+    override fun isRated(username: String, isbn: String): RateInfo = booksService.isRated(username, isbn)
 }

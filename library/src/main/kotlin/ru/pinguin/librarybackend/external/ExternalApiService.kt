@@ -25,7 +25,7 @@ class ExternalApiService(
         return Book(
                 isbn,
                 book.title,
-                findAuthors(book.authors?.map { it["key"]!! }),
+                findAuthors(book.authors?.map { it["key"]!! })?.joinToString(),
                 book.description?.get("value") ?: book.firstSentence?.get("value")
         )
     }

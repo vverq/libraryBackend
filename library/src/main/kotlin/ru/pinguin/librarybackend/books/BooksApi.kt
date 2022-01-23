@@ -3,6 +3,7 @@ package ru.pinguin.librarybackend.books
 import org.springframework.web.bind.annotation.*
 import ru.pinguin.librarybackend.dto.BookInfo
 import ru.pinguin.librarybackend.dto.CreateBookRequest
+import ru.pinguin.librarybackend.dto.RateInfo
 import ru.pinguin.librarybackend.dto.UpdateBookRequest
 
 @RequestMapping(BooksApi.BOOKS_API)
@@ -22,6 +23,9 @@ interface BooksApi {
 
     @PostMapping("/book/{isbn}/rate")
     fun rateBook(@RequestParam username: String, @PathVariable isbn: String, @RequestParam rate: Int)
+
+    @GetMapping("/book/rated")
+    fun isRated(@RequestParam username: String, @RequestParam isbn: String): RateInfo
 
     companion object {
         const val BOOKS_API = "/api/v1/library"
