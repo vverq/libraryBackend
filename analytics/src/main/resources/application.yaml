@@ -8,4 +8,4 @@ mybatis:
     variables:
       dbname: ${clickhouse.dbname}
 library:
-  base-path: http://localhost:8080
+  base-path: ${LIBRARY_BASE_PATH:}

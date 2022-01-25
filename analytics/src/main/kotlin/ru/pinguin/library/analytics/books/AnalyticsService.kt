@@ -12,7 +12,7 @@ import ru.pinguin.library.analytics.rate.RateRepository
 import ru.pinguin.librarybackend.exception.AlreadyExistsException
 
 @Service
-class BooksService(
+class AnalyticsService(
     private val repository: RateRepository,
     private val objectMapper: ObjectMapper,
     @Value("\${library.base-path}") private val libraryBasePath: String

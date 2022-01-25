@@ -9,6 +9,9 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-passw0rd}
+      PGDATA: /usr/tmp/postgres
+    volumes:
+      - /tmp/postgres_data1:/usr/tmp/postgres
     mem_limit: 512m
 
   clickhouse:
@@ -17,4 +20,34 @@ services:
     image: altinity/clickhouse-server:21.8.12.29.altinitydev.arm
     ports:
       - "8123:8123"
+    volumes:
+      - /tmp/clickhouse-data:/var/lib/clickhouse
     mem_limit: 512m
+
+  backend:
+    container_name: library-backend
+    image: library-backend
+    expose:
+      - "8080"
+    environment:
+      POSTGRES_JDBC_URL: "jdbc:postgresql://postgres:5432/postgres"
+      POSTGRES_JDBC_USERNAME: "postgres"
+      POSTGRES_JDBC_PASSWORD: "passw0rd"
+
+  analytics:
+    container_name: library-analytics
+    image: library-analytics
+    expose:
+      - "8080"
+    environment:
+      CLICKHOUSE_JDBC_URL: "jdbc:clickhouse://clickhouse:8123"
+      CLICKHOUSE_DB_NAME: "default"
+      LIBRARY_BASE_PATH: "http://backend:8080"
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "80:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
